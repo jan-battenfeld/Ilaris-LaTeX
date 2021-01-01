@@ -13,7 +13,7 @@
 % Um dir das Tippen zu erleichtern, benutze `latexmk`! 
 % > latexmk -pvc -interaction=nonstopmode -xelatex Ilaris.Spielhilfe.tex
 %
-% Diese Vorlage kann auch mit Online-Editoren bearbeitet werden: Sowohl [https://overleaf.com] (Registrierung) als auch [https://cocalc.com/] (Ohne Registrierung) funktionieren, wenn Die Schriften, die hintergrund.jpg, kasten.jpg und borde.png hochgeladen werden und bei <defaultfontfeatures> (Zeile 90) der Pfad aufs aktuelle Verzeichnis gesetzt wird 
+% Diese Vorlage kann auch mit Online-Editoren bearbeitet werden: Sowohl [https://overleaf.com] (Registrierung) als auch [https://cocalc.com/] (Ohne Registrierung) funktionieren, wenn die Schriften, die hintergrund.jpg, kasten.jpg und borde.png hochgeladen werden und bei <defaultfontfeatures> (Zeile 148) der Pfad aufs aktuelle Verzeichnis gesetzt wird 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Wichtigste Formatierungen %%
@@ -91,33 +91,41 @@ parskip=no,                  % Neuer Absatz mit Einzug deutlich machen
 % \setlength\RaggedRightParindent{\parindent}
 % \onehalfspacing
 
-\makeatletter
+% Kapitelüberschriften mit Zierbalken
+\usepackage{varwidth} %Breite anpassen für überlange Zeilen 
+\renewcommand*{\raggedchapter}{\centering}
+\renewcommand\chapterlinesformat[3]{%
+      \scalebox{-1}[1]{\raisebox{-0.3\height}{\includegraphics[height=1.4cm]{./borde.png}}}%
+	  \hspace{0.2em}%
+      \begin{varwidth}{\dimexpr\textwidth-9em\relax}%
+        \raggedchapter#2#3%
+      \end{varwidth}%
+	  \hspace{0.2em}%
+	  \raisebox{-0.3\height}{\includegraphics[height=1.4cm]{./borde.png}}%
+      \par\nobreak
+      \par
+}
+
 %%%%%%%%%%%%%%%%
+\makeatletter
+
 % Hängender Einzug auch bei Linksbund mit "\iraggedright"
 \newcommand\iraggedright{%
   \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
   \leftskip\z@skip}
 
-% Kapitelüberschriften mit Zierbalken
-\usepackage{varwidth} %Breite anpassen für überlange Zeilen 
-\renewcommand*{\raggedchapter}{\centering}
-\renewcommand\chapterlinesformat[3]{%
-      \scalebox{-1}[1]{\raisebox{-0.25\height}{\includegraphics[height=1.5cm]{./borde.png}}}%
-	  % \enskip%
-      \begin{varwidth}{\dimexpr\textwidth-7em\relax}%
-        \raggedchapter#2#3%
-      \end{varwidth}%
-	  % \enskip%
-	  \raisebox{-0.25\height}{\includegraphics[height=1.5cm]{./borde.png}}%
-      \par\nobreak
-      \par
-}
+% Nach ...skips keinen Einzug einfügen!
+\def\nind{\@afterindentfalse\@afterheading}
+\def\bigskip{\vspace{\bigskipamount}\nind}
+\def\medskip{\vspace{\medskipamount}\nind}
+\def\smallskip{\vspace{\smallskipamount}\nind}
+
 \makeatother
 %%%%%%%%%%%%%%%
 
 \newcommand{\begriff}[1]{\textbf{#1}}
-\newenvironment{geschichte}{\medskip\begin{addmargin}{0pt}\em}{\end{addmargin}\medskip}
-\newenvironment{kasten}[2]{%
+\newenvironment{geschichte}{\medskip\begingroup\begin{addmargin}{0pt}\em}{\end{addmargin}\endgroup\aftergroup\smallskip}
+\newenvironment{kasten}[2]{\begingroup%
 	\begin{ocg}{Kasten}{2}{1}
 		\noindent\tikz[overlay, blend mode=multiply]%
 		\draw (0.5\linewidth,-#1/2-0.1cm) node[inner sep=0pt]{\includegraphics[width=1.03\linewidth,height=#1]{kasten.jpg}};%
@@ -126,7 +134,7 @@ parskip=no,                  % Neuer Absatz mit Einzug deutlich machen
 		\noindent\tikz[overlay, blend mode=multiply] \draw (0,-#1) rectangle  (1\linewidth,0-0.1cm);%
 	\end{ocg}
 \begin{addmargin}{0.3cm}
-\minisec{#2}}{\end{addmargin}\medskip}
+\minisec{#2}}{\end{addmargin}\endgroup\aftergroup\medskip}
 \newcommand{\beispiel}[2][black]{\textcolor{#1}{#2}}
 
 \newcommand{\alphagraphics}[2][width=\linewidth]{\begin{tikzpicture}%

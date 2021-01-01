@@ -54,9 +54,10 @@
 		faszinierende Spielwelt verdient ein faszinierendes System.
 	\end{geschichte}
 		 \qquad --- Auszug aus der Original-Einleitung von Curthan
+
 	\bigskip
 
-	\noindent \emph{Ilaris} ist nun schon eine geraume Zeit durch die rege und aktive Community gewachsen. 
+	\emph{Ilaris} ist nun schon eine geraume Zeit durch die rege und aktive Community gewachsen. 
 	Als die Fehler-Überarbeitung der zweiten Version im Raum stand\footnote{Übrigens eine an sich schon beachtliche Leistung für ein Fanprojekt}, kam kurzzeitig die Überlegung auf das Regelwerk auch als Communityprojekt in \LaTeX\ umzuschreiben. 
 	Hieraus wollte ich eigentlich nur »kurz« ein einfaches Proof-of-Concept erstellen, um zu demonstrieren was möglich wäre und um zu testen, wie schwer es umzusetzen wäre. (Bevor man sich in eine größere Aufgabe stürzt, sollte man einen Prototyp anfertigen)
 
@@ -99,10 +100,10 @@
 
 	Absätze sind hier wie in normalen Paragraphen durch eine Leere Zeile möglich. Dies erzeugt einen eingerückten Einzug. Möchte man nach der Einleitung/Vorlesetext etc. einen Abstand, sollte man \emph{smallskip} verwenden.
 \end{geschichte}
-% Dieser Kommentar verhindert den Einzug
-	Nach einem End-Environment sollte keine Leerzeile eingefügt werden; Dies verhindert den Einzug in der nächsten Spalte. Stattdessen sollte direkt weitergeschriebn oder zur besseren Quelltext-Lesbarkeit ein \%-Zeichen in die Zeile direkt nach den Environments gesetzt werden.
 
-	So sieht ein Absatz mit Einzug aus, der Normalfall. Als nächstes werden die wichtigsten Elemente vorgestellt: Überschriften und Tabellen. Listen und Textformatierung funktionieren normal nach \LaTeX-Syntax, werden aber der Vollständigkeit halber noch einmal vorgestellt.
+Nach einem End-Environment sollte keine Leerzeile eingefügt werden; Dies verhindert den Einzug in der nächsten Spalte. Stattdessen sollte direkt weitergeschriebn oder zur besseren Quelltext-Lesbarkeit ein \%-Zeichen in die Zeile direkt nach den Environments gesetzt werden.
+
+So sieht ein Absatz mit Einzug aus, der Normalfall. Als nächstes werden die wichtigsten Elemente vorgestellt: Überschriften und Tabellen. Listen und Textformatierung funktionieren normal nach \LaTeX-Syntax, werden aber der Vollständigkeit halber noch einmal vorgestellt.
 
 
    %\section[optional: Text im Inhaltsverzeichnis]{Text}
@@ -154,7 +155,7 @@ Es können in XeLaTeX beliebige UTF8-Zeichen eingefügt werden: Beispielweise:
 	\minisec{Weitere Überschriften im Kasten mit \emph{minisec}}
 	\textsc{Achtung:} Vor einem Kasten sollte eine Leerzeile stehen, sonst verrutscht er nach rechts! Nach dem Kasten nicht, damit es keinen Einzug gibt.
 \end{kasten}
-% 
+
 Hier geht es dann mit weiterem Text weiter. Oder einer neuen Überschrift.
 
 \subsection{Drucken}
@@ -200,7 +201,8 @@ Diese Tabelle (tabularx) passt ihre Breite automatisch an, ist aber zu breit fü
 \end{tabularx}
 
 \bigskip
-\noindent Diese Tabelle ist eine normale \LaTeX\ \emph{tabular}. Sie erfordert mehr Handarbeit, dafür kann sie feinstufiger angepasst werden.
+
+Diese Tabelle ist eine normale \LaTeX\ \emph{tabular}. Sie erfordert mehr Handarbeit, dafür kann sie feinstufiger angepasst werden.
 
 
 % Normale Tabelle ohne tabularx
@@ -219,6 +221,7 @@ Diese Tabelle (tabularx) passt ihre Breite automatisch an, ist aber zu breit fü
 \section*{Großes Tabellenbeispiel}
 Außerhalb der multicols-Umgebung über die gesamte Seite.%
 \footnote{Die große Tabelle ist mit zwei \begriff{vfill} „mittig“ zentriert worden.}
+
 \bigskip
 
 \begin{tabularx}{0.98\linewidth}{p{3cm}XX}
@@ -283,8 +286,6 @@ Charakterregeln wie Spielercharaktere, müssen also zum
 Beispiel die Voraussetzungen von Vorteilen erfüllen. 
 Trotzdem wird es in den meisten Fällen genügen, 
 die Werte von NSC entsprechend ihrer geplanten 
-
-\medskip\noindent%
 Vorteile werden „auf einen Schlag“ erworben. Entweder
 dein Charakter besitzt einen Vorteil – oder eben nicht. Je
 nach Macht und Vielseitigkeit kosten sie 20, 40, 60, 80 oder
