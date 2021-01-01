@@ -1,0 +1,226 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%        README        %%%%       
+% Vor dem Start sind minimale Anpassungen nötig:
+% Diese findest du in Ilaris.Spielhilfe.tex bei TODO's (einfach per Suchfunktion anpassen)
+%    Wegen der Schriftarten wird XeLaTeX benötigt.
+%    Die Minion-Pro Schriftarten müssen vorhanden sein, und wahrscheinlich hier umbenannt werden.
+%    Du musst dich für einen Ausrichtung entscheiden -- ich empfehle Blocksatz (das ist voreingestellt)
+%
+% Es gibt mehrere Ebenen, um beim Druck Tinte sparen zu können
+% Syntax: \begin{ocg}[printocg=never]{Angezeigter Ebenenname}{ID}{Sichtbarkeit beim Öffnen: 0/1}
+%         Option: printocg: ifvisible (default)
+%
+% Um dir das Tippen zu erleichtern, benutze `latexmk`! 
+% > latexmk -pvc -interaction=nonstopmode -xelatex Ilaris.Spielhilfe.tex
+%
+% Diese Vorlage kann auch mit Online-Editoren bearbeitet werden: Sowohl [https://overleaf.com] (Registrierung) als auch [https://cocalc.com/] (Ohne Registrierung) funktionieren, wenn Die Schriften, die hintergrund.jpg, kasten.jpg und borde.png hochgeladen werden und bei <defaultfontfeatures> (Zeile 90) der Pfad aufs aktuelle Verzeichnis gesetzt wird 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wichtigste Formatierungen %%
+%                         ↓ Kapitel-Überschrift über beide Spalten
+% \begin{multicols}{2}[ \addchap{Kapitel} ]
+%     Zeispaltiger Bereich
+%     ...
+%     ...
+%    (auch über mehrere Seiten)
+% \end{multicols}
+% ----
+% \section{Überschrift}            \section*{Überschrift, die nicht im Inhaltsverzeichnis auftaucht}
+% \subsection{Unterüberschrift}    \subsection*{Unterüberschrift}
+% \subsubsection{...}              \subsubsection*{Unter$^2$überschrift}
+% \minisec{Für Manöver oder Vorteile}
+% ---
+% \begin{kasten}{höhe}{erste Überschrift}
+% 	\minisec{weitere Überschriften im Kasten}
+% 	Textblöcke...
+% \end{kasten}
+% ---
+% \begin{geschichte}
+%    Kursiver Block für Einleitung, Beispiele, Vorlesetexte
+% \end{geschichte}
+% ---
+% Bilder:
+% \includegraphics[width=0.5\linewidth]{grafik.png}
+% \alphagraphics... um alles weiße im Bild in Transparenz umzuwandeln.
+% ---
+% Tabelle mit genaueren Layoutmöglichkeiten als tabular:
+% \begin{tabularx}{\linewidth}{cXcc} % 2.Spalte hat variable Breite
+%    1 & 2 & 3 & 4 \\                % (c)enter, (l)eft, (r)ight, p{1cm} : feste Breite
+%    a & b & c & d  \\               % @{abstand} : Spaltenabstand - Bsp: ...{@{}cc@{}} : Rand entfernen
+% \end{tabularix}                                                    Bsp: ...{r@{\ }l} : nur ein Leerzeichen Abstand zwischen right_left
+% ---
+% Textformatieren: 
+% \begriff{Fett}
+% \emph{Kursiv}
+% \textsc{Kapitälchen} 
+% \begriff{textsc{Fette Kapitälchen}}
+% ---
+% Steuerung des Textflusses (mit seinen eigenen speziellen LaTeX-Eigenheiten!)
+%    Seitenumbrüche: \clearpage \cleardoublepage \cleardoubleoddpage \cleardoubleevenpage
+%    Spaltenumbruch: \columnbreak (füllt auf! Siehe Beispiele im Quelltext)
+% Abstände einfügen:
+%    \smallskip \medskip \bigskip
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[ngerman,      % Neue deutsche Rechschreibung
+twoside,                     % linke und rechte Seite unterschiedlich
+open=any,                    % Kapitel starten auf geraden Seiten
+cleardoublepage=current,     % Leerseiten haben auch Hintergrund
+parskip=no,                  % Neuer Absatz mit Einzug deutlich machen
+10pt]{scrbook}               % Schriftgröße und Vorlage (KOMA-Skript Buch)
+\usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}% Nur nötig falls nicht XeLaTeX benutzt wird
+\usepackage[table]{xcolor} % Muss vor tikz geladen werden
+\usepackage{
+	%babel, stattdessen polyglossa
+	booktabs,   % Tabellen: \toprule, \midrule, \bottomrule
+	ocg-p,      % Ebenen für transparenten Hintergrund beim Drucken
+	ragged2e,   % TODO: Dies oder iragged // Vorteil: Worttrennung
+	% setspace,   % Für \onehalfspacing (Nicht nötig für Standard-Ilaris-Style)
+	% nicefrac,   % Brüche mit schrägem Strich
+	scrlayer-scrpage, % Individuelle Header für KOMA-Script
+	enumitem,   % Listen anpassen
+	multicol,   % Zweispaltiges Layout
+	tabularx,   % Tabellen mit dynamischer Breite
+	tikz,       % Grafik-Tool
+	microtype   % Typografische Feinjustierung
+}
+\definecolor{black}{gray}{0} % 10% gray
+\usepackage[bookmarks,pdfusetitle,colorlinks,linkcolor=black,citecolor=black,urlcolor=blue,breaklinks]{hyperref}
+% \parindent=1em
+% \setlength\RaggedRightParindent{\parindent}
+% \onehalfspacing
+
+\makeatletter
+%%%%%%%%%%%%%%%%
+% Hängender Einzug auch bei Linksbund mit "\iraggedright"
+\newcommand\iraggedright{%
+  \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
+  \leftskip\z@skip}
+
+% Kapitelüberschriften mit Zierbalken
+\usepackage{varwidth} %Breite anpassen für überlange Zeilen 
+\renewcommand*{\raggedchapter}{\centering}
+\renewcommand\chapterlinesformat[3]{%
+      \scalebox{-1}[1]{\raisebox{-0.25\height}{\includegraphics[height=1.5cm]{./borde.png}}}%
+	  % \enskip%
+      \begin{varwidth}{\dimexpr\textwidth-7em\relax}%
+        \raggedchapter#2#3%
+      \end{varwidth}%
+	  % \enskip%
+	  \raisebox{-0.25\height}{\includegraphics[height=1.5cm]{./borde.png}}%
+      \par\nobreak
+      \par
+}
+\makeatother
+%%%%%%%%%%%%%%%
+
+\newcommand{\begriff}[1]{\textbf{#1}}
+\newenvironment{geschichte}{\medskip\begin{addmargin}{0pt}\em}{\end{addmargin}\medskip}
+\newenvironment{kasten}[2]{%
+	\begin{ocg}{Kasten}{2}{1}
+		\noindent\tikz[overlay, blend mode=multiply]%
+		\draw (0.5\linewidth,-#1/2-0.1cm) node[inner sep=0pt]{\includegraphics[width=1.03\linewidth,height=#1]{kasten.jpg}};%
+	\end{ocg}
+	\begin{ocg}{Rahmen-statt-Kasten-Druck}{3}{0}
+		\noindent\tikz[overlay, blend mode=multiply] \draw (0,-#1) rectangle  (1\linewidth,0-0.1cm);%
+	\end{ocg}
+\begin{addmargin}{0.3cm}
+\minisec{#2}}{\end{addmargin}\medskip}
+\newcommand{\beispiel}[2][black]{\textcolor{#1}{#2}}
+
+\newcommand{\alphagraphics}[2][width=\linewidth]{\begin{tikzpicture}%
+	\node [blend mode=multiply] at (0,0) {\includegraphics[#1]{#2}};%
+\end{tikzpicture}}
+
+%%%%%%%%%%%%%%%
+
+\usepackage[top=20mm, bottom=15mm, outer=15mm, inner=15mm, marginparsep=10mm, marginparwidth=20mm, head=12.5mm, foot=8mm]{geometry}
+
+
+\clearpairofpagestyles
+
+\usepackage{ifxetex}
+\ifxetex
+    \usepackage{polyglossia}
+	\setdefaultlanguage{german}
+    \usepackage{fontspec}
+	\defaultfontfeatures{
+		% Path="./",          % Im aktuellen Ordner nach den Schriften suchen - Für Online-LaTeX-Editoren aktivieren TODO
+		Ligatures=TeX}
+		\setmainfont[         % TODO Evtl Schriftnamen anpassen, so dass sie auf vorhandene passen
+			ItalicFont=* Italic,
+			BoldFont=* Bold Subhead,
+			BoldFeatures={SmallCapsFont=Minion-SemiboldSC},
+			% SmallCapsFont=Minion-RegularSC,
+			BoldItalicFont=* Bold Italic,
+			Ligatures=TeX
+			]{Minion Pro}
+		\setsansfont[
+			BoldFeatures={SmallCapsFont=Minion-SemiboldSC}
+			]{Minion Pro}
+        % \setmathfont{XITS Math}
+\else
+        \usepackage[T1]{fontenc}
+        \usepackage{lmodern}
+\fi
+
+\newfontfamily{\uberschrift}{Aniron}
+
+\RedeclareSectionCommand[beforeskip=0.1\baselineskip]{chapter}
+\RedeclareSectionCommands[
+	% beforeskip=-2\baselineskip,
+	runin=false,
+	beforeskip=-0.5\baselineskip,
+	afterskip=-0.1\baselineskip
+]{section,subsection,subsubsection}
+
+\addtokomafont{chapter}{\fontsize{30}{36}\uberschrift}
+\addtokomafont{section}{\Large\uberschrift} 
+\addtokomafont{subsection}{\fontsize{15.1}{16}\scshape} 
+\addtokomafont{subsubsection}{\fontsize{12}{12}\scshape} 
+\addtokomafont{minisec}{\normalfont\bfseries}
+
+% Inhaltsverzeichnis
+\setkomafont{chapterentry}{\LARGE \scshape \textbf}
+\setkomafont{chapterentrypagenumber}{\normalfont\normalsize}
+
+% Nummern in section ausblenden
+\setcounter{secnumdepth}{0}
+% Inhaltsverzeichnis -> Inhalt
+\addto{\captionsgerman}{\renewcommand*{\contentsname}{Inhalt}}
+
+
+\pagestyle{scrheadings}
+\cehead*{
+	\begin{ocg}{Hintergrund}{1}{1}
+	\tikz[remember picture,overlay] \node[inner sep=0pt] at (current page.center){\scalebox{-1}[1]{\includegraphics[width=\paperwidth,height=\paperheight]{hintergrund.jpg}}};
+	\end{ocg}
+	}
+\cohead*{
+	\begin{ocg}{Hintergrund}{1}{1}
+	\tikz[remember picture,overlay] \node[inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{hintergrund.jpg}}; 
+	\end{ocg}
+	}
+
+\ofoot*{\qquad\textbf{\normalfont\LARGE\thepage}\qquad}
+
+% Zebrastreifen in Tabellen
+\rowcolors{2}{}{brown!47}
+
+% Listenabstand
+\setlist[enumerate]{topsep=8pt,itemsep=-1ex,partopsep=8pt,parsep=1ex,leftmargin=3ex}
+
+% Tabellen vertikal zentrieren
+\renewcommand{\tabularxcolumn}[1]{m{#1}} 
+%----------------------------------
+
+% TODO Anpassen, auch wenn wir keinen \MakeTitle verwenden, da diese Infos in die Metainformationen der PDF geschrieben werden
+\title{Ilaris.tex Vorlage}
+\subtitle{entworfen von}
+\author{Jan Battenfeld}
+
+\begin{document}
+\include{inhalt}
+
+\end{document}
