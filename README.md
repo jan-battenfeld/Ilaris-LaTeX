@@ -15,10 +15,11 @@
 
 
 ## Einrichtung
+Hat sich noch einmal vereinfacht, da jetzt alles in einer LaTeX-Klasse vorhanden ist.
 Vor dem Start sind minimale Anpassungen nötig:
-Diese findest du in *Ilaris.Spielhilfe.tex* bei den TODO's (einfach per Suchfunktion anpassen)
    * Wegen der Schriftarten wird XeLaTeX benötigt.
    * Die *Minion-Pro* und *Aniron* Schriftarten müssen vorhanden sein, und wahrscheinlich noch passend umbenannt werden. Eine vernünftige Auswahl gibt es auf [https://www.wfonts.com/font/minion-pro](wfonts.com » Minion Pro) und [https://www.wfonts.com/font/aniron](wfonts.com » Aniron)-- Die benötigten Varianten für Minion Pro sind: MinionPro-Regular, -Bold, -BoldIt, -It -- Es fehlen allerdings noch die Kapitälchen (SmallCaps/SC) in Regular und Bold.
+   * Sollte es bei den Online-Editoren Probleme mit den Schriftarten geben, muss in der rpg-ilaris-Klasse ein "./" vor die Schriften vorangestellt werden.
    * Du musst dich für eine Ausrichtung entscheiden -- ich empfehle Blocksatz (das ist voreingestellt)
    TODO Aniron
    TODO -SC und -SCBold
