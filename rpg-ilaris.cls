@@ -11,6 +11,14 @@
 \DeclareOption{doubleTOC}{\renewcommand{\TOCnum}{2}}
 \DeclareOption{tripleTOC}{\renewcommand{\TOCnum}{3}}
 
+\newcommand{\atvt}[3]{\textbf{VT}\makebox[1.3em][r]{#1} #3 \textbf{AT}\makebox[1.3em][r]{#2}}
+\DeclareOption{ATvorVT}{
+	\renewcommand{\atvt}[3]{\textbf{AT}\makebox[1.3em][r]{#2}  #3 \textbf{VT}\makebox[1.3em][r]{#1}}
+	}
+
+\def\waffecls{}
+\DeclareOption{classicWaffen}{ \def\waffecls{foo} }
+
 % Hängender Einzug auch bei Linksbund: Mit "\RaggedRight" oder "\iraggedright" definieren
 \DeclareOption{linksbund}{\makeatletter\g@addto@macro\document{\RaggedRight \parindent=1em}\makeatother}
 \DeclareOption{linksbundOhneTrennung}{\makeatletter%
@@ -92,6 +100,22 @@
 \begin{addmargin}{0.3cm}
 \minisec{#2}}{\end{addmargin}\endgroup\aftergroup\medskip}
 \newcommand{\beispiel}[2][black]{\textcolor{#1}{#2}}
+
+\newcommand{\WsMrGsIni}[4]{\makebox[7.4em][l]{\textbf{Wundschwelle}} #1 \hfill \textbf{Magieresistenz} \enskip #2 \quad\! \\
+\makebox[7.4em][l]{\textbf{Geschwindigkeit}} #3 \hfill \textbf{Initiative} \enskip #4 \quad\! \\ }
+
+\newcommand{\waffe}[6]{\makebox[0.33\linewidth][l]{» \textbf{#1} \ifx\waffecls\empty\ (#2) \else\fi } \ifx\waffecls\empty \else \textbf{RW} #2 \fi \hfill \atvt{#3}{#4}{
+	\quad
+	% \hfill
+	}  \hfill \textbf{TP}\makebox[0.16\linewidth][l]{ \enskip #5 \quad\! } \def\mnvr{#6} \ifx\mnvr\empty \\[0.3em] \else \\[0.3em]  \begin{addmargin}[2em]{0em}\fontsize{10}{12} #6 \\[0.3em]\end{addmargin} \fi }
+
+\newcommand{\trennlinie}[1][0.4pt]{\par\vskip 0.4ex \hrule height #1 \par\vskip 1ex}
+
+% Als Notiz aus https://tex.stackexchange.com/questions/58628/optional-argument-for-newcommand
+% \newcommand{\test}[1][]{ \def\tst{#1} \ifx\tst\empty {optional argument was omitted} \else {optional argument was given: '#1'} \fi }
+
+\newenvironment{gegner}[6]{\begingroup\bigskip\begin{minipage}{0.95\linewidth}\begin{minipage}[b]{0.87\linewidth}\subsection*{#1} \footnotesize \emph{#2} \end{minipage}\def\bld{#3} \ifx\bld\empty \else \hfill\includegraphics[width=0.1\linewidth]{#3} \fi \trennlinie[0.8pt]
+	\footnotesize #4 \trennlinie \def\vrtl{#5} \ifx\vrtl\empty \else #5 \trennlinie \fi #6}{\trennlinie[0.8pt]\end{minipage}\endgroup\aftergroup\bigskip}
 
 \newcommand{\alphagraphics}[2][width=\linewidth]{\begin{tikzpicture}%
 	\node [blend mode=multiply] at (0,0) {\includegraphics[#1]{#2}};%

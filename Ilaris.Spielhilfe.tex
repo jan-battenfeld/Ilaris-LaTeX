@@ -1,7 +1,17 @@
-\documentclass[linksbund]{rpg-ilaris}
+\documentclass[linksbund,ATvorVT]{rpg-ilaris}
 \title{Ilaris.tex Vorlage}
 \subtitle{entworfen von}
 \author{Jan Battenfeld}
+% Nächste Zeile auskommentieren, um im aktuellen Ordner nach den Schriften zu suchen - Für Online-LaTeX-Editoren aktivieren
+% \defaultfontfeatures{Path="./", Ligatures=TeX} 
+		\setmainfont[         % TODO Evtl Schriftnamen anpassen, so dass sie auf vorhandene passen
+			ItalicFont=Aniron,
+			BoldFont=Alegreya,
+			BoldFeatures={SmallCapsFont=Minion-SemiboldSC},
+			% SmallCapsFont=Minion-RegularSC,
+			BoldItalicFont=* Bold Italic,
+			Ligatures=TeX
+			]{Minion Pro}
 
 \begin{document}
 
@@ -96,7 +106,7 @@
 \alphagraphics[width=0.965\linewidth]{einleitung.jpg} % Bild mit transparentem Weiß einfügen [width=...] ist hierbei optional und defaultet zu 1\linewidth
 
 \begin{multicols}{2}[        % Kapitelüberschrift, die über mehrere Spalten geht
-		\chapter{Beispiele}  % Die multicols-Umgebung sollte spätestens beim nächsten 
+		\chapter*{Beispiele}  % Die multicols-Umgebung sollte spätestens beim nächsten 
 		]                    % Kapitel durch \end{multicols} beendet werden.
 
 \begin{geschichte}
@@ -244,7 +254,7 @@ Hier wurde wieder \emph{tabularx} benutzt, diesmal außerhalb der Zwei-Spalten-U
 \cleardoublepage
 
 
-\chapter{Planungen}
+\chapter*{Planungen}
 	\noindent Das folgende werde ich noch in einer Version zwei nachreichen, wenn dies gewünscht ist - oder ich nicht lang genug stillhalten kann: 
 	\begin{itemize}
 		\item Eine Möglichkeit den Hintergrund auszublenden, wie im Originaldokument (Lösungsansatz dafür ist schon bekannt \vfill \textsc{[Erledigt]}
@@ -311,6 +321,116 @@ Voraussetzungen.
 		Blick und Herr über das Tierreich freischalten.
 \end{itemize}
 \end{kasten}
+
+
+
+
+\end{multicols}
+\begin{multicols}{2}[
+		\chapter*{} % Trennbalken TODO
+	]
+
+
+\begin{gegner}{Bär}{Raubtier der Wälder, großer Gegner}{würfel20}%
+	{\WsMrGsIni{11/13, Koloss I}{6}{6}{2}}
+	{}% Vorteile
+	% Waffen
+	\waffe{Prankenhieb}{1}{6}{13}{2W6+6}{Niederwerfen (–4), Doppelangriff}
+	\waffe{Biss       }{0}{13}{14}{4W6}{Feueratem (Wer zum Ziel eines Angriffs wird, muss eine Zähigkeits-Probe (16) ablegen, um nicht 1 Punkt  Erschöpfung zu erleiden.}
+
+	\textbf{Kampfvorteile:} Standfest, Sturmangriff
+\trennlinie
+	\textbf{Attribute:} GE 16, KO 42, KK 40, MU 16 \\
+	\textbf{Fertigkeiten:} Wachsamkeit 16, Pirschen 8, Laufen 16, Zähigkeit 14
+\end{gegner}
+\begin{gegner}{Bär}{Raubtier der Wälder, großer Gegner}{}%
+	{\WsMrGsIni{11/13, Koloss I}{6}{6}{2}}
+	{}% Vorteile
+	% Waffen
+	\waffe{Prankenhieb}{1}{6}{13}{2W6+6}{Niederwerfen (–4), Doppelangriff}
+	\waffe{Biss       }{0}{13}{14}{4W6}{Zerbrechlich}
+
+	\textbf{Kampfvorteile:} Standfest, Sturmangriff
+\trennlinie
+	\textbf{Attribute:} GE 16, KO 42, KK 40, MU 16 \\
+	\textbf{Fertigkeiten:} Wachsamkeit 16, Pirschen 8, Laufen 16, Zähigkeit 14
+\end{gegner}
+\begin{gegner}{Blutfischschwarm}{gierige Fressmaschinen der Dschungelflüsse; großer Gegner}{tier-small}
+	{\WsMrGsIni{3, Koloss II}{2 (einzelnes Tier)}{3, schwimmend}{1}
+	}{Wasserwesen, Schmerzimmun II, Resistenz II (Stichwaffen), Verwundbarkeit IV (Flächenschaden) }
+	\waffe{Biss}{0}{4}{14}{2W6+3}{}
+	\textbf{Kampfvorteile:} Zusätzliche Attacke II
+\trennlinie
+	\textbf{Fertigkeiten:} Pirschen 16, Schwimmen 8, Wachsamkeit 14
+\end{gegner}
+
+\begin{gegner}{Blutfischschwarm}{gierige Fressmaschinen der Dschungelflüsse; großer Gegner}{}
+	{\WsMrGsIni{3, Koloss II}{2 (einzelner Fisch)}{3, schwimmend}{1} }
+	{Wasserwesen, Schmerzimmun II, Resistenz II (Stichwaffen), Verwundbarkeit IV (Flächenschaden)}
+	\waffe{Biss}{0}{4}{14}{2W6+3}{}
+	\textbf{Kampfvorteile:} Zusätzliche Attacke II
+\trennlinie
+	\textbf{Fertigkeiten:} Pirschen 16, Schwimmen 8, Wachsamkeit 14
+\end{gegner}
+
+\begin{gegner}{Name}{Fluff <groß>}{tier}
+	{\WsMrGsIni{WS, <Koloss>}{MR}{GS}{INI}}
+	{}% Vorteile (leerlassen, optional)
+	\waffe{Waffe1}{RW}{AT}{VT}{Trefferpunkte}{Auto-Manöver (optional)}
+	\waffe{Waffe2}{RW}{AT}{VT}{Trefferpunkte}{} % ohne Auto-Manöver leerlassen
+
+	\textbf{Kampfvorteile:} KVT1, KVT2, ...
+	\trennlinie
+	\textbf{Attribute:} GE xx, KO xx, KK xx, MU xx \\
+	\textbf{Fertigkeiten:} F1 xx. F2 xx, ...
+\end{gegner}
+
+
+\begin{gegner}{Blutfischschwarm}{gierige Fressmaschinen der Dschungelflüsse; großer Gegner}{}
+	{\WsMrGsIni{3, Koloss II}{2 (einzelnes Tier)}{3, schwimmend}{1}
+	}{Wasserwesen, Schmerzimmun II, Resistenz II (Stichwaffen), Verwundbarkeit IV (Flächenschaden)}
+	\waffe{Bissattackencombo}{0}{4}{14}{2W6+3}{}
+	\waffe{Biss}{0}{4}{14}{2W6+9000}{}
+	\textbf{Kampfvorteile:} Zusätzliche Attacke II
+
+» \textbf{Leichte Armbrust}\\
+» \textbf{Ork. Reiterbogen}\\
+» \textbf{Tentakelklammer}\\
+» \textbf{Vulkanglasdolch}\\
+» \textbf{Flammeninferno}\\
+» \textbf{Amazonensäbel}\\
+» \textbf{Flammenstrahl}\\
+» \textbf{Schwanzschlag}\\
+» \textbf{Wasserschwall}\\
+» \textbf{Schleimsekret}\\
+» \textbf{Rankenangriff}\\
+» \textbf{Tangschlingen}\\
+» \textbf{Kriegshammer}\\
+» \textbf{Schnabelhieb}\\
+» \textbf{Dornensalve}\\
+» \textbf{Prankenhieb}\\
+» \textbf{Unbewaffnet}\\
+» \textbf{Schwanzhieb}\\
+» \textbf{Andergaster}\\
+» \textbf{Khunchomer}\\
+» \textbf{Hellebarde}\\
+» \textbf{Baumstamm}\\
+» \textbf{Holzspeer}\\
+» \textbf{Kurzbogen}\\
+» \textbf{Stoßzähne}\\
+» \textbf{Trampeln}\\
+» \textbf{Klauen}\\
+» \textbf{Biss}\\
+
+\trennlinie
+	\textbf{Fertigkeiten:} Pirschen 16, Schwimmen 8, Wachsamkeit 14
+\end{gegner}
+
+
+
+
+
+
 \end{multicols}
 
 \end{document}
