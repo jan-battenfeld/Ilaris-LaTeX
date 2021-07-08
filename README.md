@@ -2,15 +2,16 @@
 
 Diese Vorlage soll es allen Ilaris-Spielern ermöglichen, möglichst einfach gut gelayoutete Spielhilfen mit Hilfe von LaTeX im Stil der originalen Ilaris-Regeln zu erstellen. Eine Lizenz ist noch nicht endgültig überlegt, aber viel mehr als Namensnennung und eine Form des Copyleft wird es nicht werden. Wer unsicher ist fragt bis dahin einfach freundlich nach.
 
-## Beispiel
+## Beispiel Kapitel Proben 
+Original und 3 "nachgebaute" Versionen*, mit jeweils anderer Textausrichtung (die weißen Rahmen und falschen Überschriften stammen noch aus einer ersten Version und sind im Beispieldokument näher am Original)
 
-![vergleich1.gif](Original und 3 "nachgebaute" Versionen, mit jeweils anderer Textausrichtung)
+![Original und 3 "nachgebaute" Versionen, mit jeweils anderer Textausrichtung](vergleich1.gif)
 
 
 ### Einleitung und Beispieldokument
 
-[Ilaris.Spielhilfe.pdf](Spielhilfen-Vorlage und Erklärung)
-[Ilaris.Spielhilfe.tex](Quelltext zur Datei)
+[Spielhilfen-Vorlage mit Erklärung der Befehle](Ilaris.Spielhilfe.pdf)
+([Quelltext zur Datei](Ilaris.Spielhilfe.tex))
 
 
 ## LaTeX - Installation vs Online
@@ -28,15 +29,17 @@ Diese Vorlage soll es allen Ilaris-Spielern ermöglichen, möglichst einfach gut
 Hat sich noch einmal vereinfacht, da jetzt alles in einer LaTeX-Klasse vorhanden ist.
 Vor dem Start sind minimale Anpassungen nötig:
    * Wegen der Schriftarten wird XeLaTeX benötigt.
-   * Die *Minion-Pro* und *Aniron* Schriftarten müssen vorhanden sein, und wahrscheinlich noch passend umbenannt werden. Eine vernünftige Auswahl gibt es auf [https://www.wfonts.com/font/minion-pro](wfonts.com » Minion Pro) und [https://www.wfonts.com/font/aniron](wfonts.com » Aniron)-- Die benötigten Varianten für Minion Pro sind: MinionPro-Regular, -Bold, -BoldIt, -It -- Es fehlen allerdings noch die Kapitälchen (SmallCaps/SC) in Regular und Bold.
+   * Die *Minion-Pro* und *Aniron* Schriftarten müssen vorhanden sein, und wahrscheinlich noch passend umbenannt werden. Eine vernünftige Auswahl gibt es auf [wfonts.com » Minion Pro](https://www.wfonts.com/font/minion-pro) und [wfonts.com » Aniron](https://www.wfonts.com/font/aniron) -- Die benötigten Varianten für Minion Pro sind: MinionPro-Regular, -Bold, -BoldIt, -It -- Es fehlen allerdings noch die Kapitälchen (SmallCaps/SC) in Regular und Bold.
    * Sollte es bei den Online-Editoren Probleme mit den Schriftarten geben, muss entweder in der rpg-ilaris-Klasse ein "./" vor die Schriften vorangestellt werden. Einfachheitshalber ist in der Spielhilfe eine Zeile mit einer globalen Pfadangabe, in der man auch die Schriftdateinamen ändern kann. *@TODO@ Weitere Vereinfachung folgt in der nächsten Version* 
    * Du musst dich für eine Ausrichtung entscheiden -- ich empfehle Blocksatz (das ist voreingestellt)
-   TODO Aniron
-   TODO -SC und -SCBold
+   @TODO@ Aniron
+   @TODO@ -SC und -SCBold
 
 Es gibt mehrere Ebenen, um beim Druck Tinte sparen zu können
-Syntax: `\begin{ocg}[printocg=never]{Angezeigter Ebenenname}{ID}{Sichtbarkeit beim Öffnen: 0/1}`
+```
+\begin{ocg}[printocg=never]{Angezeigter Ebenenname}{ID}{Sichtbarkeit beim Öffnen: 0/1}
         Option: printocg: ifvisible (default)
+```
 
 ### Automatisierung des PDF Erzeugens
 Um dir das Tippen zu erleichtern, benutze `latexmk`! Im Verzeichnis, in der auch die Dateien liegen diesen Befehl ausführen, damit bei jedem Speichern des Quelltextes die PDF aktualisiert wird (PDF-Viewer mit Aktualisierungsfunktion benutzen - es könnte Probleme mit Adobe unter Windows geben).
